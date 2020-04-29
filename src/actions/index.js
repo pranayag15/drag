@@ -1,1 +1,1 @@
-export {addNewWidget, updateWidgetPosition, updateWidgetSize} from './widget.actions'
+export {addNewInputField, updateInputPosition, updateInputSize} from './widget.actions'

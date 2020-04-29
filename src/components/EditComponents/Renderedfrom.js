@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GridLayout from "react-grid-layout";
 import {
   Form,
   Select,
@@ -15,6 +16,8 @@ import {
   Col,
 } from "antd";
 import "antd/dist/antd.css";
+import "../../../node_modules/react-grid-layout/css/styles.css";
+import "../../../node_modules/react-resizable/css/styles.css";
 
 const { Option } = Select;
 const layout = {
@@ -35,6 +38,10 @@ class ContactForm extends Component {
     super(props);
     this.state = {};
   }
+
+  onLayoutChange = (layout, layouts) => {
+    console.table(layout);
+  };
 
   onFinish = (values) => {
     console.log("form data", values);
@@ -58,25 +65,83 @@ class ContactForm extends Component {
           onFinish={this.onFinish}
           onFinishFailed={this.onFinishFailed}
         >
-          <Form.Item
-            name="username"
-            label="username"
-            rules={[
-              {
-                type: "",
-                required: true,
-              },
-            ]}
+          <GridLayout
+            onLayoutChange={this.onLayoutChange}
+            className="layout"
+            cols={12}
+            rowHeight={30}
+            width={1200}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item name="radio-group" label="Radio.Group" rules={[{ required: true } ]}>
-            <Radio.Group>
-              <Radio value="a">item 1</Radio>
-              <Radio value="b">item 2</Radio>
-              <Radio value="c">item 3</Radio>
-            </Radio.Group>
-          </Form.Item>
+            <div
+              key="a"
+              data-grid={{ x: 4, y: 0, w: 5, h: 2, minW: 4, maxH: 2 }}
+            >
+              <Form.Item
+                name="username"
+                label="username"
+                rules={[
+                  {
+                    type: "",
+                    required: true,
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </div>
+            <div
+              key="b"
+              data-grid={{ x: 4, y: 0, w: 5, h: 2, minW: 4, maxH: 2 }}
+            >
+              <Form.Item
+                name="hululuul"
+                label="hulullu"
+                rules={[
+                  {
+                    type: "",
+                    required: true,
+                  },
+                ]}
+              >
+                <Input placeholder="Resizeable input field" />
+              </Form.Item>
+            </div>
+
+          <div key="c" data-grid={{ x: 4, y: 0, w: 5, h: 2, minW: 4, maxH: 2 }}>
+            <Form.Item
+              name="radio-group"
+              label="Radio.Group"
+              rules={[{ required: true }]}
+            >
+              <Radio.Group>
+                <Radio value="a">item 1</Radio>
+                <Radio value="b">item 2</Radio>
+                <Radio value="c">item 3</Radio>
+              </Radio.Group>
+            </Form.Item>
+          </div>
+          <div key="d" data-grid={{ x: 4, y: 0, w: 5, h: 2, minW: 4, maxH: 2 }}>
+            <Form.Item
+              name={["input", "select"]}
+              label="Field type"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select field type",
+                },
+              ]}
+            >
+              <Select placeholder="Select field type to make validation easy.">
+                <Option value="string">String</Option>
+                <Option value="email">Email</Option>
+                <Option value="number">Number</Option>
+                <Option value="password">Password</Option>
+                <Option value="textarea">Textarea</Option>
+                <Option value="search">Search</Option>
+              </Select>
+            </Form.Item>
+          </div>
+          </GridLayout>
           <Form.Item name="slider" label="Slider">
             <Slider
               marks={{
@@ -102,72 +167,72 @@ class ContactForm extends Component {
             <Input.Password />
           </Form.Item>
           <Form.Item name="checkbox-group" label="Checkbox.Group">
-        <Checkbox.Group>
-          <Row>
-            <Col span={6}>
-              <Checkbox
-                value="A"
-                style={{
-                  lineHeight: "32px",
-                }}
-              >
-                A
-              </Checkbox>
-            </Col>
-            <Col span={6}>
-              <Checkbox
-                value="B"
-                style={{
-                  lineHeight: "32px",
-                }}
-                disabled
-              >
-                B
-              </Checkbox>
-            </Col>
-            <Col span={6}>
-              <Checkbox
-                value="C"
-                style={{
-                  lineHeight: "32px",
-                }}
-              >
-                C
-              </Checkbox>
-            </Col>
-            <Col span={6}>
-              <Checkbox
-                value="D"
-                style={{
-                  lineHeight: "32px",
-                }}
-              >
-                D
-              </Checkbox>
-            </Col>
-            <Col span={6}>
-              <Checkbox
-                value="E"
-                style={{
-                  lineHeight: "32px",
-                }}
-              >
-                E
-              </Checkbox>
-            </Col>
-            <Col span={6}>
-              <Checkbox
-                value="F"
-                style={{
-                  lineHeight: "32px",
-                }}
-              >
-                F
-              </Checkbox>
-            </Col>
-          </Row>
-        </Checkbox.Group>
-      </Form.Item>
+            <Checkbox.Group>
+              <Row>
+                <Col span={6}>
+                  <Checkbox
+                    value="A"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                  >
+                    A
+                  </Checkbox>
+                </Col>
+                <Col span={6}>
+                  <Checkbox
+                    value="B"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                    disabled
+                  >
+                    B
+                  </Checkbox>
+                </Col>
+                <Col span={6}>
+                  <Checkbox
+                    value="C"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                  >
+                    C
+                  </Checkbox>
+                </Col>
+                <Col span={6}>
+                  <Checkbox
+                    value="D"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                  >
+                    D
+                  </Checkbox>
+                </Col>
+                <Col span={6}>
+                  <Checkbox
+                    value="E"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                  >
+                    E
+                  </Checkbox>
+                </Col>
+                <Col span={6}>
+                  <Checkbox
+                    value="F"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                  >
+                    F
+                  </Checkbox>
+                </Col>
+              </Row>
+            </Checkbox.Group>
+          </Form.Item>
           <Form.Item
             name="Search"
             label="Search Field"

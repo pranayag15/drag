@@ -1,19 +1,19 @@
-import {ADD_NEW_WIDGET,  UPADTE_WIDGET_POSITION, UPADTE_WIDGET_SIZE} from './types'
+import {ADD_NEW_INPUT_FIELD,  UPADTE_INPUT_FIELD_POSITION, UPADTE_INPUT_FIELD_SIZE} from './types'
 
-export const addNewWidget = (widgetType, widgetProperties) => {
+export const addNewInputField = (fieldType, fieldData) => {
     return {
-        type: ADD_NEW_WIDGET,
+        type: ADD_NEW_INPUT_FIELD,
         payload: {
-            widgetID: Date.now(),
-            widgetType,
-            widgetProperties,
+            inputFieldId: Date.now(),
+            fieldType,
+            fieldData,
         }
     }
 }
 
-export const updateWidgetPosition = (id, position) => {
+export const updateInputPosition = (id, position) => {
     return {
-        type: UPADTE_WIDGET_POSITION,
+        type: UPADTE_INPUT_FIELD_POSITION,
         payload: {
             id,
             position
@@ -21,9 +21,9 @@ export const updateWidgetPosition = (id, position) => {
     }
 }
 
-export const updateWidgetSize = (id, size) => {
+export const updateInputSize = (id, size) => {
     return {
-        type: UPADTE_WIDGET_SIZE,
+        type: UPADTE_INPUT_FIELD_SIZE,
         payload: {
             id,
             size

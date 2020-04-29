@@ -21,7 +21,7 @@ class App extends Component {
                   <EditFormPanel />
                 </div>
                 <div style={{ padding: "50px" }} className="col-sm-9">
-                  {/* <Renderedfrom /> */}
+                  <Renderedfrom />
                 </div>
               </div>
             </Route>

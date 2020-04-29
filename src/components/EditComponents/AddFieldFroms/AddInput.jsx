@@ -17,10 +17,8 @@ import {
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "./addForm.css";
-import {
-  addNewWidget
-} from '../../../actions/'
-import { connect } from 'react-redux'
+import { addNewInputField } from "../../../actions/";
+import { connect } from "react-redux";
 const { Option } = Select;
 const tailLayout = {
   wrapperCol: {
@@ -28,7 +26,6 @@ const tailLayout = {
     span: 5,
   },
 };
-
 
 class ContactForm extends Component {
   formRef = React.createRef();
@@ -39,9 +36,10 @@ class ContactForm extends Component {
   }
 
   onFinish = (values) => {
-    if (values.input.isrequired = values.input.isrequired ? values.input.isrequired : true)
-      console.log("form data", values);
-      this.props.addNewWidget("form", values)
+    console.log("form data", values);
+    this.props.addNewInputField("Input", values);
+    this.props.closeModal();
+    this.formRef.current.resetFields();
   };
 
   onFinishFailed = (errorInfo) => {
@@ -49,18 +47,19 @@ class ContactForm extends Component {
   };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <Form
-        //initialValues={{}}
+        initialValues={{ isrequired: true }}
         layout="vertical"
+        ref={this.formRef}
         onFinish={this.onFinish}
         className="my-form"
       >
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
-              name={["input", "username"]}
+              name={["username"]}
               label="Field Name"
               rules={[
                 {
@@ -74,7 +73,7 @@ class ContactForm extends Component {
           </Col>
           <Col span={12}>
             <Form.Item
-              name={["input", "label"]}
+              name={["label"]}
               label="Label"
               rules={[
                 {
@@ -87,13 +86,13 @@ class ContactForm extends Component {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name={["input", "placeholder"]} label="Placeholder">
+            <Form.Item name={["placeholder"]} label="Placeholder">
               <Input placeholder="Placeholder is this text that you are reading." />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
-              name={["input", "select"]}
+              name={["select"]}
               label="Field type"
               rules={[
                 {
@@ -113,7 +112,7 @@ class ContactForm extends Component {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name={["input", "isrequired"]} label="Is required">
+            <Form.Item name={["isrequired"]} label="Is required">
               <Switch
                 defaultChecked
                 checkedChildren={<CheckOutlined />}
@@ -135,15 +134,14 @@ class ContactForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  widget:state.allWidgets
-})
+const mapStateToProps = (state) => ({
+  widget: state.allWidgets,
+});
 
-const mapDispatchToProps = dispatch => ({
-  addNewWidget
-})
+const mapDispatchToProps = (dispatch) => ({
+  addNewInputField,
+});
 
 export default connect(mapStateToProps, {
-  addNewWidget,
-})(ContactForm)
-
+  addNewInputField,
+})(ContactForm);

@@ -1,34 +1,32 @@
 import {
-    ADD_NEW_WIDGET,
-    UPADTE_WIDGET_POSITION,
-    UPADTE_WIDGET_SIZE
+  ADD_NEW_INPUT_FIELD,
+    UPADTE_INPUT_FIELD_POSITION,
+    UPADTE_INPUT_FIELD_SIZE
   } from "../actions/types";
   import update from "immutability-helper";
   
   const initState = {
-    widgets: []
+    inputFields: []
   };
   
   export default function(state = initState, action) {
     switch (action.type) {
-      case ADD_NEW_WIDGET:
-        let newWidget = state.widgets;
-        state.widgets.push({
-          widgetID: action.payload.widgetID,
-          type: action.payload.widgetType,
-          property : action.payload.widgetProperties
+      case ADD_NEW_INPUT_FIELD:
+        let newWidget = state.inputFields;
+        state.inputFields.push({
+          inputFieldId: action.payload.inputFieldId,
+          type: action.payload.fieldType,
+          fieldData : action.payload.fieldData
         });
-        console.log(state.widgets, "local statee");
-        console.log(state)
         return {
           ...state
         };
   
-      case UPADTE_WIDGET_POSITION:
-        var widgetIndex = state.widgets.findIndex(
-          obj => obj.widgetID == action.payload.id
+      case UPADTE_INPUT_FIELD_POSITION:
+        var widgetIndex = state.inputFields.findIndex(
+          obj => obj.inputFieldId == action.payload.id
         );
-        state.widgets = update(state.widgets, {
+        state.inputFields = update(state.inputFields, {
           [widgetIndex]: {
             position: {
               left: { $set: action.payload.position.x },
@@ -40,11 +38,11 @@ import {
           ...state
         };
   
-      case UPADTE_WIDGET_SIZE:
-        var widgetIndex = state.widgets.findIndex(
-          obj => obj.widgetID == action.payload.id
+      case UPADTE_INPUT_FIELD_SIZE:
+        var widgetIndex = state.inputFields.findIndex(
+          obj => obj.inputFieldId == action.payload.id
         );
-        state.widgets = update(state.widgets, {
+        state.inputFields = update(state.inputFields, {
           [widgetIndex]: {
             size: {
               width: { $set: action.payload.size.offsetWidth },
