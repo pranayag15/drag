@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import store from "./store";
+import "antd/dist/antd.css";
+import { Button, message } from "antd";
+import "./App.css";
+import EditFormPanel from "./components/EditComponents/FormEditWindow"
+import Renderedfrom from "./components/EditComponents/Renderedfrom"
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Provider store={store}>
+          <switch>
+            <Route path="/">
+              <div className="row">
+                <div style={{ borderStyle: "none solid", "height": "98vh", "paddingLeft": "25px" }} className="col-sm-3">
+                  <EditFormPanel />
+                </div>
+                <div style={{ padding: "50px" }} className="col-sm-9">
+                  {/* <Renderedfrom /> */}
+                </div>
+              </div>
+            </Route>
+          </switch>
+        </Provider>
+      </Router>
+    )
+  }
 }
+
 
 export default App;
