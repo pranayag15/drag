@@ -17,7 +17,7 @@ import {
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "./addForm.css";
-import { addNewInputField } from "../../../actions/";
+import { addNewField } from "../../../actions/";
 import { connect } from "react-redux";
 const { Option } = Select;
 const tailLayout = {
@@ -37,7 +37,7 @@ class ContactForm extends Component {
 
   onFinish = (values) => {
     console.log("form data", values);
-    this.props.addNewInputField("Input", values);
+    this.props.addNewField("Input", values);
     this.props.closeModal();
     this.formRef.current.resetFields();
   };
@@ -139,9 +139,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addNewInputField,
+  addNewField,
 });
 
 export default connect(mapStateToProps, {
-  addNewInputField,
+  addNewField,
 })(ContactForm);

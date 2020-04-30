@@ -1,20 +1,20 @@
 import {
-  ADD_NEW_INPUT_FIELD,
-    UPADTE_INPUT_FIELD_POSITION,
-    UPADTE_INPUT_FIELD_SIZE
+    ADD_NEW_FIELD,
+    UPADTE_FIELD_POSITION,
+    UPADTE_FIELD_SIZE
   } from "../actions/types";
   import update from "immutability-helper";
   
   const initState = {
-    inputFields: []
+    formFields: []
   };
   
   export default function(state = initState, action) {
     switch (action.type) {
-      case ADD_NEW_INPUT_FIELD:
-        let newWidget = state.inputFields;
-        state.inputFields.push({
-          inputFieldId: action.payload.inputFieldId,
+      case ADD_NEW_FIELD:
+        let newWidget = state.formFields;
+        state.formFields.push({
+          fieldId: action.payload.fieldId,
           type: action.payload.fieldType,
           fieldData : action.payload.fieldData
         });
@@ -22,11 +22,11 @@ import {
           ...state
         };
   
-      case UPADTE_INPUT_FIELD_POSITION:
-        var widgetIndex = state.inputFields.findIndex(
-          obj => obj.inputFieldId == action.payload.id
+      case UPADTE_FIELD_POSITION:
+        var widgetIndex = state.formFields.findIndex(
+          obj => obj.fieldId == action.payload.id
         );
-        state.inputFields = update(state.inputFields, {
+        state.formFields = update(state.formFields, {
           [widgetIndex]: {
             position: {
               left: { $set: action.payload.position.x },
@@ -38,11 +38,11 @@ import {
           ...state
         };
   
-      case UPADTE_INPUT_FIELD_SIZE:
-        var widgetIndex = state.inputFields.findIndex(
-          obj => obj.inputFieldId == action.payload.id
+      case UPADTE_FIELD_SIZE:
+        var widgetIndex = state.formFields.findIndex(
+          obj => obj.fieldId == action.payload.id
         );
-        state.inputFields = update(state.inputFields, {
+        state.formFields = update(state.formFields, {
           [widgetIndex]: {
             size: {
               width: { $set: action.payload.size.offsetWidth },

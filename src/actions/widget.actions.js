@@ -1,19 +1,19 @@
-import {ADD_NEW_INPUT_FIELD,  UPADTE_INPUT_FIELD_POSITION, UPADTE_INPUT_FIELD_SIZE} from './types'
+import {ADD_NEW_FIELD,  UPADTE_FIELD_POSITION, UPADTE_FIELD_SIZE} from './types'
 
-export const addNewInputField = (fieldType, fieldData) => {
+export const addNewField = (fieldType, fieldData) => {
     return {
-        type: ADD_NEW_INPUT_FIELD,
+        type: ADD_NEW_FIELD,
         payload: {
-            inputFieldId: Date.now(),
+            fieldId: Date.now(),
             fieldType,
             fieldData,
         }
     }
 }
 
-export const updateInputPosition = (id, position) => {
+export const updatePosition = (id, position) => {
     return {
-        type: UPADTE_INPUT_FIELD_POSITION,
+        type: UPADTE_FIELD_POSITION,
         payload: {
             id,
             position
@@ -21,9 +21,9 @@ export const updateInputPosition = (id, position) => {
     }
 }
 
-export const updateInputSize = (id, size) => {
+export const updateFieldSize = (id, size) => {
     return {
-        type: UPADTE_INPUT_FIELD_SIZE,
+        type: UPADTE_FIELD_SIZE,
         payload: {
             id,
             size
