@@ -16,6 +16,7 @@ import {
         state.formFields.push({
           fieldId: action.payload.fieldId,
           type: action.payload.fieldType,
+          position: action.payload.fieldPOsition,
           fieldData : action.payload.fieldData
         });
         return {
@@ -28,10 +29,10 @@ import {
         );
         state.formFields = update(state.formFields, {
           [widgetIndex]: {
-            position: {
-              left: { $set: action.payload.position.x },
-              top: { $set: action.payload.position.y }
-            }
+            position: {  $set: action.payload.position}
+            //   left: { $set: action.payload.position.x },
+            //   top: { $set: action.payload.position.y }
+            // }
           }
         });
         return {
