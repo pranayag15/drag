@@ -27,6 +27,8 @@ const tailLayout = {
   },
 };
 
+const initPos = { x: 4, y: 0, w: 5, h: 2, minW: 4, maxH: 2 };
+
 class ContactForm extends Component {
   formRef = React.createRef();
 
@@ -37,7 +39,7 @@ class ContactForm extends Component {
 
   onFinish = (values) => {
     console.log("form data", values);
-    this.props.addNewField("Input", values);
+    this.props.addNewField("Input", values, initPos);
     this.props.closeModal();
     this.formRef.current.resetFields();
   };
@@ -47,7 +49,6 @@ class ContactForm extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <Form
         initialValues={{ isrequired: true }}
@@ -59,7 +60,7 @@ class ContactForm extends Component {
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
-              name={["username"]}
+              name={["name"]}
               label="Field Name"
               rules={[
                 {
@@ -92,7 +93,7 @@ class ContactForm extends Component {
           </Col>
           <Col span={12}>
             <Form.Item
-              name={["select"]}
+              name={["type"]}
               label="Field type"
               rules={[
                 {
@@ -135,7 +136,7 @@ class ContactForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  widget: state.allWidgets,
+  formFields: state.allComponents,
 });
 
 const mapDispatchToProps = (dispatch) => ({

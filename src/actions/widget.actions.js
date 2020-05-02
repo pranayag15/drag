@@ -1,11 +1,13 @@
 import {ADD_NEW_FIELD,  UPADTE_FIELD_POSITION, UPADTE_FIELD_SIZE} from './types'
 
-export const addNewField = (fieldType, fieldData) => {
+export const addNewField = (fieldType, fieldData, fieldPOsition) => {
     return {
         type: ADD_NEW_FIELD,
         payload: {
             fieldId: Date.now(),
+            // fieldId: "a",
             fieldType,
+            fieldPOsition,
             fieldData,
         }
     }

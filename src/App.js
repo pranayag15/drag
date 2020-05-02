@@ -9,6 +9,7 @@ import { Button, message } from "antd";
 import "./App.css";
 import EditFormPanel from "./components/EditComponents/FormEditWindow"
 import Renderedfrom from "./components/EditComponents/Renderedfrom"
+import Grid from "./grid"
 class App extends Component {
   render() {
     return (
@@ -21,7 +22,8 @@ class App extends Component {
                   <EditFormPanel />
                 </div>
                 <div style={{ padding: "50px" }} className="col-sm-9">
-                  <Renderedfrom />
+                  <Renderedfrom/>
+                  {/* <Grid /> */}
                 </div>
               </div>
             </Route>
