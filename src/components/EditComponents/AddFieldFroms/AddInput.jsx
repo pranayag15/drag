@@ -31,7 +31,7 @@ const initPos = { x: 4, y: 0, w: 5, h: 2, minW: 4, maxH: 2 };
 
 class ContactForm extends Component {
   formRef = React.createRef();
-
+  
   constructor(props) {
     super(props);
     this.state = {};
@@ -39,7 +39,7 @@ class ContactForm extends Component {
 
   onFinish = (values) => {
     console.log("form data", values);
-    this.props.addNewField("Input", values, initPos);
+    this.props.addNewField(this.props.widgetID,"Input", values, initPos);
     this.props.closeModal();
     this.formRef.current.resetFields();
   };
@@ -49,6 +49,7 @@ class ContactForm extends Component {
   };
 
   render() {
+    console.log(this.props)
     return (
       <Form
         initialValues={{ isrequired: true }}

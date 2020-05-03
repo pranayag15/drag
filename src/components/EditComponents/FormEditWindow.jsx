@@ -27,6 +27,7 @@ class FormEditWindow extends Component {
   };
 
   render() {
+    console.log(this.props.widgetID)
     return (
       <div>
         <center>
@@ -60,6 +61,7 @@ class FormEditWindow extends Component {
           <Panel header="INPUT" key="1">
             <center>
               <Modal
+                widgetID = {this.props.widgetID}
                 buttonValue="Add Text Field"
                 form={InputFieldForm}
                 modalHeading="Input Add Modal"

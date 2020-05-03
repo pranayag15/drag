@@ -43,6 +43,7 @@ class Modal1 extends React.Component {
          <this.props.form
             onCancel={this.handleCancel}
             closeModal={this.handleOk}
+            widgetID={this.props.widgetID}
          />
         </Modal>
       </div>
