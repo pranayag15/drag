@@ -30,6 +30,7 @@ import {
       case ADD_NEW_FIELD:
         // let newWidget = state.Widgets;
         state.Widgets.map(val=>{
+          if(val[action.payload.widgetID])
           val[action.payload.widgetID].childs.push({
             fieldId: action.payload.fieldId,
             type: action.payload.fieldType,
