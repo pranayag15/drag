@@ -27,14 +27,14 @@ class App extends Component {
       <Router>
         <Provider store={store}>
           <switch>
-            <Route path="/">
+            <Route exact path="/">
               <div className="row">
                 <div style={{ borderStyle: "none solid", "height": "98vh", "paddingLeft": "25px", padding: "2px", paddingTop: "10px" }} className="col-sm-2">
-                  {this.state.molecule == "FORM" && <EditFormPanel widgetID={this.state.widgetID} />}
-                  {!this.state.molecule && <MoleculeList handleMolecule={this.handleMolecule} />}
+                  {/* {this.state.molecule == "FORM" && <EditFormPanel widgetID={this.state.widgetID} />} */}
+                  <MoleculeList handleMolecule={this.handleMolecule} />
                 </div>
                 <div style={{ padding: "10px" }} className="col-sm-10">
-                  {this.state.molecule && <div className="container-fluid">
+                  {/* {this.state.molecule && <div className="container-fluid">
                     <center> <h4>Customize your {this.state.molecule.toLowerCase()}</h4> </center>
                     <center>
                       <button className="btn btn-success">
@@ -47,9 +47,20 @@ class App extends Component {
                     </center>
                     <br/>
                     <Playground />
-                  </div>}
+                  </div>} */}
                 </div>
               </div>
+            </Route>
+            <Route path="/createform" >
+              <div className="row">
+                  <div style={{ borderStyle: "none solid", "height": "98vh", "paddingLeft": "25px" }} className="col-sm-2">
+                    <EditFormPanel />
+                  </div>
+                  <div style={{ padding: "50px" }} className="col-sm-10">
+                    {/* <Renderedfrom/> */}
+                    {/* <Grid /> */}
+                  </div>
+                </div>
             </Route>
           </switch>
         </Provider>
