@@ -11,6 +11,7 @@ import EditFormPanel from "./components/EditComponents/FormEditWindow"
 import Renderedfrom from "./components/EditComponents/Renderedfrom"
 import MoleculeList from './components/Molecules/moleculeList'
 import Playground from './components/playground'
+import CardTools from './components/Molecules/card/cardTools'
 class App extends Component {
   state = {
     molecule: false
@@ -31,6 +32,7 @@ class App extends Component {
               <div className="row">
                 <div style={{ borderStyle: "none solid", "height": "98vh", "paddingLeft": "25px", padding: "2px", paddingTop: "10px" }} className="col-sm-2">
                   {this.state.molecule == "FORM" && <EditFormPanel widgetID={this.state.widgetID} />}
+                  {this.state.molecule == "CARD" && <CardTools widgetID={this.state.widgetID} />}
                   {!this.state.molecule && <MoleculeList handleMolecule={this.handleMolecule} />}
                 </div>
                 <div style={{ padding: "10px" }} className="col-sm-10">
@@ -46,7 +48,7 @@ class App extends Component {
                     </button>
                     </center>
                     <br/>
-                    <Playground />
+                    <Playground widgetID={this.state.widgetID} />
                   </div>}
                 </div>
               </div>

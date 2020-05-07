@@ -32,7 +32,7 @@ import {
         state.Widgets.map(val=>{
           if(val[action.payload.widgetID])
           val[action.payload.widgetID].childs.push({
-            fieldId: action.payload.fieldId,
+            fieldID: action.payload.fieldId,
             type: action.payload.fieldType,
             position: action.payload.fieldPOsition,
             fieldData : action.payload.fieldData
