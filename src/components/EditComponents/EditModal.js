@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Button, Icon, Form } from "antd";
 import { EditOutlined } from '@ant-design/icons';
-import EditForm from "../EditComponents/Renderedfrom"
+import EditForm from "./RenderedFields/Renderedfrom"
 
 
 class Modal1 extends React.Component {

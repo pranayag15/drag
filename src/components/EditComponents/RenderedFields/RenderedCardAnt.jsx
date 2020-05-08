@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import _ from 'lodash'
 import { connect } from "react-redux";
 import GridLayout from "react-grid-layout";
-import { mapComponents } from "../../helperFunction/create-form/switchFields";
+import { mapCard } from "../../../helperFunction/Cardmap";
 import {
   Form,
   Select,
@@ -19,9 +19,9 @@ import {
   Col,
 } from "antd";
 import "antd/dist/antd.css";
-import { updatePosition } from "../../actions/";
-import "../../../node_modules/react-grid-layout/css/styles.css";
-import "../../../node_modules/react-resizable/css/styles.css";
+import { updatePosition } from "../../../actions";
+import "../../../../node_modules/react-grid-layout/css/styles.css";
+import "../../../../node_modules/react-resizable/css/styles.css";
 
 const { Option } = Select;
 const layout = {
@@ -35,7 +35,7 @@ const tailLayout = {
   },
 };
 
-const initGrid = { x: 4, y: 0, w: 5, h: 2, minW: 4, maxH: 2 };
+const initGrid = { x: 4, y: 0, w: 4, h: 5 };
 
 class ContactForm extends Component {
   formRef = React.createRef();
@@ -47,19 +47,6 @@ class ContactForm extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.formFields !== this.props.formFields) {
-  //     var arr = Array(4 + this.props.formFields.formFields.length).fill(
-  //       initGrid
-  //     );
-  //     var tl = this.props.formFields.formFields.length
-  //     // console.log(arr, "layout");
-  //     this.setState({ currLayout: [...this.state.currLayout, initGrid] }, () => {
-  //       console.log(this.state.currLayout, "currLayout");
-  //     })
-  //   }
-  // }
-
   onLayoutChange = (layout, layouts) => {
     console.log(layout)
     //COMMENT OUT BELOW TO STOP CALLING UPDATEfIELD FUNCTION
@@ -68,8 +55,8 @@ class ContactForm extends Component {
     this.setState({ currLayout: layout })
     changedField.map((item, i) => {
       var { i, x, y, w, h } = item
-      this.props.updatePosition(i, { x, y, w, h })
-      console.log(i, x, y, w, h)
+      // this.props.updatePosition(i, { x, y, w, h })
+      // console.log(i, x, y, w, h)
     })
   };
 
@@ -83,11 +70,19 @@ class ContactForm extends Component {
     console.log("Failed:", errorInfo);
   };
   render() { 
-    // console.log(this.state.currLayout, "propsss")
-    const mappedFields = this.props.formFields.formFields.map((item, i) => {
+    console.log(this.props.allComponents.Widgets, "propsss")
+    var currentWidget = this.props.allComponents.Widgets.filter(item => {
+      if(item.hasOwnProperty(this.props.widgetID)){
+        return item[this.props.widgetID]
+      }
+    })
+    var formFields = currentWidget[0][this.props.widgetID].childs
+    // console.log(formFields, "curr", currentWidget)
+    const mappedFields = formFields.map((item, i) => {
+      // console.log(item, "item")
       return (
-        <div key={item.fieldId} data-grid={initGrid}>
-          {mapComponents(item.type, item.fieldData)}
+        <div key={item.fieldID} data-grid={initGrid}>
+          {mapCard(item.fieldData)}
         </div>
       );
     });
@@ -109,26 +104,10 @@ class ContactForm extends Component {
             rowHeight={30}
             width={1200}
           >
+           
             {mappedFields}
 
           </GridLayout>
-          <Form.Item {...tailLayout}>
-            {/* <center>
-              <button htmlType="submit" className="contact-submit">
-                Submit
-              </button>
-            </center> */}
-            <Button key="back" onClick={this.props.onCancel}>
-              Return
-            </Button>
-            <Button
-              style={{ marginLeft: "5%" }}
-              htmlType="submit"
-              type="primary"
-            >
-              Submit
-            </Button>
-          </Form.Item>
         </Form>
       </div>
     )
@@ -136,7 +115,7 @@ class ContactForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  formFields: state.allComponents,
+  allComponents: state.allComponents,
 });
 
 const mapDispatchToProps = (dispatch) => ({

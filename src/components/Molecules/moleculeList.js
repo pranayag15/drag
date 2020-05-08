@@ -19,6 +19,9 @@ class MoleculeList extends Component {
                 <button onClick={() => this.handleMoleculeSelection("CARD")} className="btn btn-info btn-block" >
                     Create Card
                 </button>
+                <button onClick={() => this.handleMoleculeSelection("ANTDCARD")} className="btn btn-info btn-block" >
+                    Create Antd Card
+                </button>
             </div>
         )
     }

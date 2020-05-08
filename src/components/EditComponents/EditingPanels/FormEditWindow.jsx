@@ -1,8 +1,8 @@
 import React, { Component, version } from "react";
 import { Form, Input, Button, Collapse } from "antd";
-import Modal from "./EditModal";
-import SelectFieldDynamicForm from "./AddFieldFroms/AddSelect";
-import InputFieldForm from "./AddFieldFroms/AddInput"
+import Modal from "../EditModal";
+import SelectFieldDynamicForm from "../AddFieldFroms/AddSelect";
+import InputFieldForm from "../AddFieldFroms/AddInput"
 
 const { Panel } = Collapse;
 
