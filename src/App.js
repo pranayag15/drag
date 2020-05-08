@@ -37,7 +37,11 @@ class App extends Component {
                 </div>
                 <div style={{ padding: "10px" }} className="col-sm-10">
                   {this.state.molecule && <div className="container-fluid">
-                    <center> <h4>Customize your {this.state.molecule.toLowerCase()}</h4> </center>
+                    <center> <h4>Customize your {this.state.molecule.toLowerCase()}</h4>
+                      <h6 style={{color:"red"}}>
+                        Don't worry you will able to alter the size of the {this.state.molecule.toLowerCase()} once created
+                      </h6>
+                     </center>
                     <center>
                       <button className="btn btn-success">
                         Add To main website

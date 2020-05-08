@@ -50,13 +50,13 @@ class CardTools extends Component {
                         name="Button" 
                         handleFormModal={this.handleFormModal} 
                         widgetID ={this.props.widgetID}  
-                        data={ButtonForm} 
+                        data={this.state.type} 
                     >
                     </FormModal>}
                 <center>
                     <h5>Tools for Card</h5>
                 </center>
-                <Button onClick={()=>this.handleFormModal(true, "ButtonForm")} type="primary" block> Button </Button>
+                <Button onClick={()=>this.handleFormModal(true, ButtonForm)} type="primary" block> Button </Button>
             </div>
         )
     }
