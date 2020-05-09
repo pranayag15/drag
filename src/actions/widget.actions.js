@@ -25,11 +25,12 @@ export const addNewField = (widgetID, fieldType, fieldData, fieldPOsition) => {
     }
 }
 
-export const updatePosition = (id, position) => {
+export const updatePosition = (widgetID, position) => {
+
     return {
         type: UPADTE_FIELD_POSITION,
         payload: {
-            id,
+            widgetID,
             position
         }
     }

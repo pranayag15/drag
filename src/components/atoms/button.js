@@ -8,6 +8,7 @@ function CustomButton(props) {
         color:props.data.font_color,
         height:"100%",
         width:"100%",
+        fontSize:props.data.font_size+"px"
         // borderColor:"#1890ff"
     }
     return(

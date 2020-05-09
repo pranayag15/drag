@@ -1,44 +1,47 @@
 import React, { Component } from 'react'
 import RGL, { WidthProvider } from "react-grid-layout";
 import CustomButton from './atoms/button'
-import {connect} from 'react-redux'
+import CustomImage from './atoms/image'
+import { connect } from 'react-redux'
+import { updatePosition } from '../actions/widget.actions'
 // import CustomButton from './atoms/button'
 const ReactGridLayout = WidthProvider(RGL);
 class Playground extends Component {
-    state={
-        widgets:[]
+    state = {
+        widgetsID: [],
+        widgets: {}
     }
-    componentDidMount() {
-        this.props.formFields.Widgets.map(val=>{
-            if(val[this.props.widgetID]) {
-                this.setState({
-                    widgets:val[this.props.widgetID]
-                })
-            }
-        })
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.formFields != this.props.formFields) {
+            this.setState({
+                widgetsID: Object.keys(this.props.formFields.Widgets[this.props.widgetID].childs),
+                widgets: this.props.formFields.Widgets[this.props.widgetID].childs
+            })
+        }
+    }
+
+    handleChange = (data) => {
+        console.log(data)
+        this.props.updatePosition(this.props.widgetID, data)
     }
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         return (
-            <div className="container-fluid" style={{ backgroundColor: "#f0f0f0" , overflow:"scroll"}}>
-               
-                <ReactGridLayout
-                    
-                    cols={12}
-                    rowHeight={30}
-                    // isResizable="true"
-                >    
-                {this.state.widgets.childs && this.state.widgets.childs.map(val=>
-                    <div key={val.fieldID} data-grid={val.position} >
-                        {val.type=="Button" && <CustomButton data={val.fieldData}></CustomButton> }
-                    </div>
-                    )}
-                
+            <div className="container-fluid"  style={{ backgroundColor: "#f0f0f0", overflow: "scroll", width:"30vw" }}>
 
-                {/* <div key="c" data-grid={{x: 4, y: 0, w: 1, h: 2}} > 
-                    <CustomButton></CustomButton>
-                </div> */}
-                </ReactGridLayout>
+                {this.state.widgetsID.length > 0 && <ReactGridLayout
+                    cols={3}
+                    rowHeight={30}
+                    onDragStop={this.handleChange}
+                    onResizeStop={this.handleChange}
+                >
+                    {this.state.widgetsID.map(val =>
+                        <div key={val} data-grid={this.state.widgets[val].position} >
+                            {this.state.widgets[val].type == "Button" && <CustomButton data={this.state.widgets[val].fieldData}></CustomButton>}
+                            {this.state.widgets[val].type == "Image" && <CustomImage data={this.state.widgets[val].fieldData}></CustomImage>}
+                        </div>
+                    )}
+                </ReactGridLayout>}
 
             </div>
         )
@@ -48,6 +51,10 @@ class Playground extends Component {
 
 const mapStateToProps = (state) => ({
     formFields: state.allComponents,
-  });
-  
-  export default connect(mapStateToProps)(Playground);
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    updatePosition,
+});
+
+export default connect(mapStateToProps, { updatePosition })(Playground);
