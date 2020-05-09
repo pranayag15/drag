@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import RGL, { WidthProvider } from "react-grid-layout";
 import CustomButton from './atoms/button'
+import CustomImage from './atoms/image'
 import { connect } from 'react-redux'
 import { updatePosition } from '../actions/widget.actions'
 // import CustomButton from './atoms/button'
@@ -37,6 +38,7 @@ class Playground extends Component {
                     {this.state.widgetsID.map(val =>
                         <div key={val} data-grid={this.state.widgets[val].position} >
                             {this.state.widgets[val].type == "Button" && <CustomButton data={this.state.widgets[val].fieldData}></CustomButton>}
+                            {this.state.widgets[val].type == "Image" && <CustomImage data={this.state.widgets[val].fieldData}></CustomImage>}
                         </div>
                     )}
                 </ReactGridLayout>}

@@ -30,33 +30,55 @@ const ButtonForm = [
     }
 
 ]
+const ImageForm = [
+    { initialValues: 
+        {
+           alt:"image"
+        }
+    },
+    {
+        name:"image",
+        required: true,
+        type:"file"
+
+    },
+    {
+        name:"alt",
+        required: true,
+        type:"text"
+    },
+    
+]
 
 
 class CardTools extends Component {
     state = {
         FormModal : false
     }
-    handleFormModal = (data, type) => {
-        console.log(data,type)
+    handleFormModal = (data, fieldName, formValue) => {
+        // console.log(data,type)
         this.setState({
             FormModal : data,
-            type:type
+            fieldName:fieldName,
+            formValue:formValue
         })
     }
     render() {
         return(
             <div>
                 {this.state.FormModal && <FormModal 
-                        name="Button" 
+                        name={this.state.fieldName} 
                         handleFormModal={this.handleFormModal} 
                         widgetID ={this.props.widgetID}  
-                        data={this.state.type} 
+                        data={this.state.formValue} 
+                        name={this.state.fieldName}
                     >
                     </FormModal>}
                 <center>
                     <h5>Tools for Card</h5>
                 </center>
-                <Button onClick={()=>this.handleFormModal(true, ButtonForm)} type="primary" block> Button </Button>
+                <Button onClick={()=>this.handleFormModal(true, "Button", ButtonForm)} type="primary" style={{marginBottom:"3px"}} block> Button </Button>
+                <Button onClick={()=>this.handleFormModal(true, "Image", ImageForm)} type="primary" style={{marginBottom:"3px"}} block> Image </Button>
             </div>
         )
     }
