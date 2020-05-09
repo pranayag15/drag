@@ -71,18 +71,13 @@ class ContactForm extends Component {
   };
   render() { 
     console.log(this.props.allComponents.Widgets, "propsss", this.props.widgetID)
-    var currentWidget = this.props.allComponents.Widgets.filter(item => {
-      if(item.hasOwnProperty(this.props.widgetID)){
-        return item[this.props.widgetID]
-      }
-    })
-    var formFields = currentWidget[0][this.props.widgetID].childs
-    console.log(formFields, "curr", currentWidget)
-    const mappedFields = formFields.map((item, i) => {
+    var formFields = this.props.allComponents.Widgets[this.props.widgetID].childs
+    // console.log(formFields, "curr")
+    const mappedFields = Object.keys(formFields).map((item, i) => {
       // console.log(item, "item")
       return (
-        <div key={item.fieldID} data-grid={initGrid}>
-          {mapComponents(item.type, item.fieldData)}
+        <div key={item} data-grid={initGrid}>
+          {mapComponents(formFields[item].type, formFields[item].fieldData)}
         </div>
       );
     });
