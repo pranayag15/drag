@@ -3,7 +3,10 @@
   height: "98vh";
   padding-left: "25px";
 }
-
+.container-fluid::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
 
 .btn {
   min-width: 100px;

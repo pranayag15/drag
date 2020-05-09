@@ -5,6 +5,14 @@ import './FormModal.css'
 import { connect } from 'react-redux'
 import { addNewField } from '../actions/widget.actions'
 class FormModal extends Component {
+    state ={
+        values:{}
+    }
+    componentDidMount(){
+        this.setState({
+            values : this.props.data[0].initialValues
+        })
+    }
     onFinish = values => {
         console.log('Success:', values);
         let widgetID = this.props.widgetID
@@ -24,6 +32,12 @@ class FormModal extends Component {
         console.log("hi")
         this.props.handleFormModal(false, null)
     }
+    handleChange = (changedValues , allValues) =>   {
+        // console.log(allValues)
+        this.setState({
+            values:allValues
+        })
+    }
     render() {
         const normFile = e => {
             console.log('Upload event:', e);
@@ -39,7 +53,7 @@ class FormModal extends Component {
         // const tailLayout = {
         //     wrapperCol: { offset: 8, span: 16 },
         // };
-        console.log(this.props)
+        console.log(this.state)
         return (
             <div className="container-fluid">
                 <div className="FormModalBackground" >
@@ -55,6 +69,7 @@ class FormModal extends Component {
                             initialValues={this.props.data[0].initialValues}
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
+                            onValuesChange={this.handleChange}
                         >
                             <div className="row">
                                 {
@@ -103,6 +118,11 @@ class FormModal extends Component {
                             </div>
                             <div className="container">
                                 <center>
+
+                                    {this.state.values.font_size && <p style={{fontSize:this.state.values.font_size+"px", color:this.state.values.font_color}} >
+                                        Magic UI
+                                        </p>}
+
                                     <Form.Item >
                                         <Button type="primary" htmlType="submit">
                                             Submit
